@@ -1,0 +1,1 @@
+docker build -t mitbringen/mysql --build-arg ROOT_PW=Mondeo88 .

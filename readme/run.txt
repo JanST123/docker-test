@@ -1,0 +1,1 @@
+docker run -d -v /home/jan/Desktop/docker/data/mysql:/var/lib/mysql -v /home/jan/Desktop/docker/data/log:/var/log/mysql -p 8306:3306 --name mitbringen_mysql  mitbringen/mysql
