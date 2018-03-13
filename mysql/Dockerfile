@@ -3,6 +3,7 @@ FROM debian:jessie
 
 LABEL vendor="mitbringen.net"
 LABEL net.mitbringen.version="0.0.1"
+LABEL net.mitbringen.component="MySQL"
 
 
 
