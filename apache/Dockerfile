@@ -16,7 +16,8 @@ RUN apt-get update \
     libapache2-mod-fcgid \
     lsb-release \
     supervisor \
-    wget
+    wget \
+    apt-transport-https
 
 # add repo with php7.2
 RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
@@ -25,6 +26,7 @@ RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | tee /etc
 # install php7.2
 RUN apt-get update \
     && apt-get install -y \
+    vim \
     php7.2 \
     php7.2-fpm \
     php7.2-common \
@@ -36,7 +38,7 @@ RUN apt-get update \
     php7.2-opcache
 
 
-# Script to pass MySQL
+# Script to pass www-data
 RUN mkdir -p /var/www/html
 COPY index.php /var/www/html
 
@@ -46,6 +48,9 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 # link apache php-fpm config
 RUN mkdir /run/php
 RUN ln -s /etc/apache2/conf-available/php7.2-fpm.conf /etc/apache2/conf-enabled
+RUN ln -s /etc/apache2/mods-available/proxy.conf /etc/apache2/mods-enabled
+RUN ln -s /etc/apache2/mods-available/proxy.load /etc/apache2/mods-enabled
+RUN ln -s /etc/apache2/mods-available/proxy_fcgi.load /etc/apache2/mods-enabled
 
 # +++ COPY mitbringen config to sites-enabled
 
@@ -53,7 +58,7 @@ RUN ln -s /etc/apache2/conf-available/php7.2-fpm.conf /etc/apache2/conf-enabled
 
 
 
-# expose MySQL port to a network
+# expose apache port to a network
 EXPOSE 80
 
 # open to mount

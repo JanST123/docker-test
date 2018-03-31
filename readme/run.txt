@@ -1,1 +1,4 @@
 docker run -d -v /home/jan/Desktop/docker/data/mysql:/var/lib/mysql -v /home/jan/Desktop/docker/data/log:/var/log/mysql -p 8306:3306 --name mitbringen_mysql  mitbringen/mysql
+
+
+docker run -d -v  /home/jan/Desktop/docker/data/www/:/var/www -p 880:80 --name mitbringen_apache mitbringen/apache

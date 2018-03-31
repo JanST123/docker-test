@@ -1,0 +1,3 @@
+docker network create mitbringen
+docker network connect mitbringen mitbringen_apache
+docker network connect mitbringen mitbringen_mysql
