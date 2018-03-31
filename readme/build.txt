@@ -1,1 +1,2 @@
-docker build -t mitbringen/mysql
+docker build -t mitbringen/mysql .
+docker build -t mitbringen/apache .

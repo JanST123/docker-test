@@ -37,6 +37,10 @@ RUN apt-get update \
     php7.2-mysql \
     php7.2-opcache
 
+# for dev-machine: set www-data UID and GID to 1000 to match system user on shared volumes
+RUN usermod -u 1000 www-data
+RUN groupmod -g 1000 www-data
+
 
 # Script to pass www-data
 RUN mkdir -p /var/www/html
@@ -51,6 +55,8 @@ RUN ln -s /etc/apache2/conf-available/php7.2-fpm.conf /etc/apache2/conf-enabled
 RUN ln -s /etc/apache2/mods-available/proxy.conf /etc/apache2/mods-enabled
 RUN ln -s /etc/apache2/mods-available/proxy.load /etc/apache2/mods-enabled
 RUN ln -s /etc/apache2/mods-available/proxy_fcgi.load /etc/apache2/mods-enabled
+
+# +++ import mysql dump
 
 # +++ COPY mitbringen config to sites-enabled
 
